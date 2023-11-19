@@ -1,0 +1,59 @@
+from django.db import models
+
+
+class Books(models.Model):
+    bookname=models.CharField(max_length=200)
+    authorname=models.CharField(max_length=200)
+    price=models.PositiveIntegerField()
+    category=models.CharField(max_length=200)
+    publishdate=models.DateField()
+    
+
+
+................orm query for creating a new object.................
+
+Books.objects.create(bookname="Sherlock Holmes",authorname="Arthur conan",price=22280,category="mystery",publishdate="2005-03-07")
+
+................orm query for fetching all record............... 
+
+>>>qs=Books.objects.all()
+
+.............orm query for filtering all books records.............
+qs=Books.objects.filter(category="fantasy")
+qs=Books.objects.filter(price__gte=50000)
+
+__gte >= greater than
+__lte <= less than
+__gt >
+__lt <
+
+.......................exclude an object..................
+>>> qs=Books.objects.exclude(category="romance")
+
+
+
+
+.....................orm query for fetching a specific books details............
+
+>>>qs=Books.objects.get(id=1)
+
+orm query for filtering books records
+
+qs=Books.objects.filter(category="fantasy")
+
+............update method......
+>>>qs=Books.objects.filter(id=2).update(category="tragedy")
+
+
+............Delete............
+>>>qs=Books.objects.filter(id=7).delete()
+
+
+...............sorting books using their price.......ascending order...
+
+>>>qs=Books.objects.all().order_by("price")
+
+
+
+...............sorting Books using their price.......descending order...
+>>>qs=Books.objects.all().order_by("-price")
